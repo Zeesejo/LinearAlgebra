@@ -140,28 +140,28 @@
                     <details class="bg-gray-50 p-4 rounded-lg border">
                         <summary class="font-bold cursor-pointer text-indigo-600 text-lg">Exercise 1: The Zero Vector</summary>
                         <p class="mt-3 text-md" id="ex1-prompt">The dot product $$\vec{v} \cdot \vec{v}$$ is equal to $$||\vec{v}||^2$$. Using this, prove that if $$\vec{v} \cdot \vec{v} = 0$$, then $$\vec{v}$$ must be the zero vector. Explain your reasoning.</p>
-                        <button onclick="getAIExplanation(1)" class="mt-4 px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition">✨ Get AI Explanation</button>
+                        <button onclick="getAIExplanation(1)" class="mt-4 px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition">✨ Get Detailed Explanation</button>
                         <div id="ex1-explanation" class="mt-4 p-4 bg-white rounded-lg border border-gray-200 ai-explanation" style="display:none;"></div>
                     </details>
                     <!-- Exercise 2 -->
                     <details class="bg-gray-50 p-4 rounded-lg border">
                         <summary class="font-bold cursor-pointer text-indigo-600 text-lg">Exercise 2: Orthogonality</summary>
                         <p class="mt-3 text-md" id="ex2-prompt">Given $$\vec{a} = \begin{bmatrix} 2 \\ 5 \end{bmatrix}$$, find a non-zero vector $$\vec{b}$$ that is orthogonal to $$\vec{a}$$. Is there only one such vector? Explain the geometric implication of your answer.</p>
-                        <button onclick="getAIExplanation(2)" class="mt-4 px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition">✨ Get AI Explanation</button>
+                        <button onclick="getAIExplanation(2)" class="mt-4 px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition">✨ Get Detailed Explanation</button>
                         <div id="ex2-explanation" class="mt-4 p-4 bg-white rounded-lg border border-gray-200 ai-explanation" style="display:none;"></div>
                     </details>
                      <!-- Exercise 3 -->
                      <details class="bg-gray-50 p-4 rounded-lg border">
                         <summary class="font-bold cursor-pointer text-indigo-600 text-lg">Exercise 3: Conceptual Application</summary>
                         <p class="mt-3 text-md" id="ex3-prompt">In a recommendation system, a user's preference is $$\vec{u} = \begin{bmatrix} 5 \\ 1 \end{bmatrix}$$ (action, comedy). Movie A is $$\vec{m}_A = \begin{bmatrix} 4 \\ 0 \end{bmatrix}$$ and Movie B is $$\vec{m}_B = \begin{bmatrix} 3 \\ 3 \end{bmatrix}$$. Which movie would you recommend? Justify your answer using the dot product and explain what the resulting scalar value *means* in this context.</p>
-                        <button onclick="getAIExplanation(3)" class="mt-4 px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition">✨ Get AI Explanation</button>
+                        <button onclick="getAIExplanation(3)" class="mt-4 px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition">✨ Get Detailed Explanation</button>
                         <div id="ex3-explanation" class="mt-4 p-4 bg-white rounded-lg border border-gray-200 ai-explanation" style="display:none;"></div>
                     </details>
                     <!-- Exercise 4 -->
                      <details class="bg-gray-50 p-4 rounded-lg border">
                         <summary class="font-bold cursor-pointer text-indigo-600 text-lg">Exercise 4: Projections</summary>
                         <p class="mt-3 text-md" id="ex4-prompt">The projection of vector $$\vec{a}$$ onto vector $$\vec{b}$$ finds the "shadow" that $$\vec{a}$$ casts on $$\vec{b}$$. The formula is $$proj_{\vec{b}}\vec{a} = \frac{\vec{a} \cdot \vec{b}}{||\vec{b}||^2}\vec{b}$$. If $$\vec{a} = \begin{bmatrix} 2 \\ 3 \end{bmatrix}$$ and $$\vec{b} = \begin{bmatrix} 4 \\ 0 \end{bmatrix}$$, what is the projection of $$\vec{a}$$ onto $$\vec{b}$$? What does this resulting vector represent geometrically?</p>
-                        <button onclick="getAIExplanation(4)" class="mt-4 px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition">✨ Get AI Explanation</button>
+                        <button onclick="getAIExplanation(4)" class="mt-4 px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition">✨ Get Detailed Explanation</button>
                         <div id="ex4-explanation" class="mt-4 p-4 bg-white rounded-lg border border-gray-200 ai-explanation" style="display:none;"></div>
                     </details>
                 </div>
@@ -223,7 +223,17 @@
             outputElement.style.display = 'block';
             outputElement.innerHTML = '<div class="flex items-center"><svg class="animate-spin -ml-1 mr-3 h-5 w-5 text-indigo-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg><span>Thinking...</span></div>';
 
-            const apiKey = ""; 
+            // TODO: Add your Gemini API key here
+            // Get one free at: https://aistudio.google.com/
+            const apiKey = "YOUR_GEMINI_API_KEY_HERE"; 
+            
+            // Check if API key is provided
+            if (!apiKey || apiKey === "YOUR_GEMINI_API_KEY_HERE") {
+                // Provide static explanations when no API key is available
+                showStaticExplanation(exerciseNumber, outputElement);
+                return;
+            }
+            
             const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-05-20:generateContent?key=${apiKey}`;
             
             let chatHistory = [{ role: "user", parts: [{ text: prompt }] }];
@@ -261,6 +271,95 @@
                     }
                 }
             }
+        }
+
+        function showStaticExplanation(exerciseNumber, outputElement) {
+            const explanations = {
+                1: `**Exercise 1: The Zero Vector - Explanation**
+
+**Problem**: Prove that if v⃗ · v⃗ = 0, then v⃗ must be the zero vector.
+
+**Step-by-Step Solution**:
+
+1. **Start with the given relationship**: We know that v⃗ · v⃗ = ||v⃗||²
+
+2. **Apply the given condition**: If v⃗ · v⃗ = 0, then ||v⃗||² = 0
+
+3. **Use properties of magnitude**: Since ||v⃗||² represents the square of the magnitude, and we know that the square of any real number is non-negative, ||v⃗||² ≥ 0
+
+4. **The only solution**: The only way ||v⃗||² = 0 is if ||v⃗|| = 0
+
+5. **Conclude**: A vector has magnitude 0 if and only if it is the zero vector v⃗ = [0, 0, ..., 0]
+
+**Geometric Intuition**: The dot product of a vector with itself gives you the square of its length. If this is zero, the vector has no length, meaning it's the zero vector - a point with no direction or magnitude.`,
+
+                2: `**Exercise 2: Orthogonality - Explanation**
+
+**Problem**: Find a non-zero vector b⃗ orthogonal to a⃗ = [2, 5].
+
+**Step-by-Step Solution**:
+
+1. **Orthogonality condition**: Two vectors are orthogonal when their dot product equals zero: a⃗ · b⃗ = 0
+
+2. **Set up the equation**: Let b⃗ = [x, y]. Then: [2, 5] · [x, y] = 2x + 5y = 0
+
+3. **Solve for the relationship**: 2x + 5y = 0, so x = -5y/2
+
+4. **Choose a value**: Let y = 2, then x = -5. So b⃗ = [-5, 2]
+
+5. **Verify**: [2, 5] · [-5, 2] = 2(-5) + 5(2) = -10 + 10 = 0 ✓
+
+**Are there other solutions?** Yes! Any scalar multiple of [-5, 2] will also be orthogonal to a⃗. The set of all orthogonal vectors forms a line through the origin.
+
+**Geometric Interpretation**: In 2D, the orthogonal vectors to a⃗ form a line perpendicular to a⃗. This represents all possible directions that are 90° from the original vector.`,
+
+                3: `**Exercise 3: Recommendation System - Explanation**
+
+**Problem**: User preference u⃗ = [5, 1], Movie A = [4, 0], Movie B = [3, 3]. Which to recommend?
+
+**Step-by-Step Solution**:
+
+1. **Calculate dot products**:
+   - u⃗ · Movie A = [5, 1] · [4, 0] = 5(4) + 1(0) = 20
+   - u⃗ · Movie B = [5, 1] · [3, 3] = 5(3) + 1(3) = 18
+
+2. **Compare the values**: 20 > 18, so Movie A has higher similarity
+
+3. **Recommendation**: Recommend Movie A
+
+**What the numbers mean**:
+- The dot product measures "alignment" between preferences and movie characteristics
+- Higher dot product = better match
+- Movie A (pure action, no comedy) aligns well with user's strong action preference (5) and weak comedy preference (1)
+- Movie B (balanced action/comedy) doesn't match the user's strong action bias as well
+
+**Real-world insight**: This is the foundation of collaborative filtering in recommendation systems. The dot product captures how well a user's preference profile matches an item's feature profile.`,
+
+                4: `**Exercise 4: Vector Projections - Explanation**
+
+**Problem**: Project a⃗ = [2, 3] onto b⃗ = [4, 0]. What does this represent?
+
+**Step-by-Step Solution**:
+
+1. **Apply the projection formula**: proj_b⃗(a⃗) = (a⃗ · b⃗/||b⃗||²) × b⃗
+
+2. **Calculate the dot product**: a⃗ · b⃗ = [2, 3] · [4, 0] = 2(4) + 3(0) = 8
+
+3. **Calculate ||b⃗||²**: ||b⃗||² = 4² + 0² = 16
+
+4. **Compute the scalar**: (a⃗ · b⃗/||b⃗||²) = 8/16 = 1/2
+
+5. **Find the projection**: proj_b⃗(a⃗) = (1/2) × [4, 0] = [2, 0]
+
+**Geometric Interpretation**:
+- The projection [2, 0] is the "shadow" that a⃗ casts onto the direction of b⃗
+- It's the component of a⃗ that points in the same direction as b⃗
+- The length 2 tells us how much of a⃗ goes in the b⃗ direction
+
+**Practical Applications**: Projections are used in computer graphics for lighting calculations, in machine learning for dimensionality reduction, and in physics for decomposing forces into components.`
+            };
+
+            outputElement.innerText = explanations[exerciseNumber] || "Explanation not available for this exercise.";
         }
 
         function getAIExplanation(exerciseNumber) {
