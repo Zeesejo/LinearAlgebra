@@ -219,7 +219,7 @@
     </div>
 
     <script>
-        async function callGemini(prompt, outputElement) {
+        async function callGemini(prompt, outputElement, exerciseNumber) {
             outputElement.style.display = 'block';
             outputElement.innerHTML = '<div class="flex items-center"><svg class="animate-spin -ml-1 mr-3 h-5 w-5 text-indigo-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg><span>Thinking...</span></div>';
 
@@ -227,7 +227,7 @@
             // Get one free at: https://aistudio.google.com/
             const apiKey = "YOUR_GEMINI_API_KEY_HERE"; 
             
-            // Check if API key is provided
+            // Check if API key is provided - fallback to static explanations
             if (!apiKey || apiKey === "YOUR_GEMINI_API_KEY_HERE") {
                 // Provide static explanations when no API key is available
                 showStaticExplanation(exerciseNumber, outputElement);
@@ -366,10 +366,11 @@
             const promptElement = document.getElementById(`ex${exerciseNumber}-prompt`);
             const outputElement = document.getElementById(`ex${exerciseNumber}-explanation`);
             
+            // Use AI explanations (will fallback to static if no API key)
             const baseTutorPrompt = "You are an expert linear algebra tutor for a university student. Provide a clear, step-by-step explanation for the following problem. Explain the reasoning and the geometric intuition behind each step. Use markdown for formatting if needed.\n\nProblem:\n";
             const fullPrompt = baseTutorPrompt + promptElement.innerText;
             
-            callGemini(fullPrompt, outputElement);
+            callGemini(fullPrompt, outputElement, exerciseNumber);
         }
     </script>
 </body>
