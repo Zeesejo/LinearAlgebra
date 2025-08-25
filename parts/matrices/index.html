@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Part 2: Matrices - Interactive Linear Algebra</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <style>
+        mjx-container { margin: 1em 0; text-align: center; font-size: 1.25em; }
+        .breadcrumb { background: linear-gradient(135deg, #10b981 0%, #059669 100%); }
+    </style>
+</head>
+<body class="bg-gray-100 text-gray-800">
+
+    <!-- Navigation Header -->
+    <nav class="breadcrumb text-white p-4 sticky top-0 z-50 shadow-lg">
+        <div class="container mx-auto max-w-4xl flex justify-between items-center">
+            <div class="flex items-center space-x-4">
+                <a href="../../main-index.html" class="flex items-center space-x-2 hover:text-gray-200 transition">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
+                    </svg>
+                    <span>Back to Home</span>
+                </a>
+                <span class="text-gray-300">/</span>
+                <span class="font-semibold">Part 2: Matrices</span>
+            </div>
+            <div class="flex space-x-2">
+                <a href="../vectors/" class="bg-white bg-opacity-20 px-3 py-1 rounded text-sm hover:bg-opacity-30 transition">
+                    ← Previous: Vectors
+                </a>
+                <button disabled class="bg-gray-500 bg-opacity-50 px-3 py-1 rounded text-sm cursor-not-allowed">
+                    Next: Eigenvalues →
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container mx-auto max-w-4xl p-4 sm:p-8">
+        <header class="text-center mb-12">
+            <h1 class="text-5xl font-bold text-gray-900">Interactive Linear Algebra</h1>
+            <p class="text-md text-gray-600 mt-2">A guide by Zeeshan Modi</p>
+            <h2 class="text-3xl text-green-600 mt-6">Part 2: Matrices - Transforming Space</h2>
+            
+            <!-- Progress Indicator -->
+            <div class="mt-8 bg-white rounded-lg p-4 shadow-md">
+                <div class="flex justify-between text-sm text-gray-600 mb-2">
+                    <span>Progress</span>
+                    <span>2 of 6 parts</span>
+                </div>
+                <div class="w-full bg-gray-200 rounded-full h-2">
+                    <div class="bg-gradient-to-r from-green-500 to-emerald-600 h-2 rounded-full w-2/6"></div>
+                </div>
+            </div>
+        </header>
+        
+        <main>
+            <!-- Coming Soon Message -->
+            <section class="bg-white p-8 rounded-xl shadow-lg mb-10 text-center">
+                <div class="mb-8">
+                    <div class="mx-auto w-24 h-24 bg-green-100 rounded-full flex items-center justify-center mb-6">
+                        <svg class="w-12 h-12 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-3xl font-bold text-gray-800 mb-4">Part 2: Coming Soon!</h3>
+                    <p class="text-lg text-gray-600 mb-6">
+                        This section will cover matrices as linear transformations, how they work as "machines" 
+                        for transforming space, and their crucial role in machine learning algorithms.
+                    </p>
+                </div>
+
+                <div class="bg-gray-50 rounded-lg p-6 mb-8">
+                    <h4 class="text-xl font-semibold mb-4">What you'll learn:</h4>
+                    <div class="grid md:grid-cols-2 gap-4 text-left">
+                        <ul class="space-y-2">
+                            <li class="flex items-center">
+                                <svg class="w-5 h-5 text-green-500 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                                </svg>
+                                Matrix operations and properties
+                            </li>
+                            <li class="flex items-center">
+                                <svg class="w-5 h-5 text-green-500 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                                </svg>
+                                Linear transformations visualization
+                            </li>
+                            <li class="flex items-center">
+                                <svg class="w-5 h-5 text-green-500 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                                </svg>
+                                Matrix multiplication intuition
+                            </li>
+                        </ul>
+                        <ul class="space-y-2">
+                            <li class="flex items-center">
+                                <svg class="w-5 h-5 text-green-500 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                                </svg>
+                                Inverse matrices and systems
+                            </li>
+                            <li class="flex items-center">
+                                <svg class="w-5 h-5 text-green-500 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                                </svg>
+                                Neural network connections
+                            </li>
+                            <li class="flex items-center">
+                                <svg class="w-5 h-5 text-green-500 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                                </svg>
+                                Real-world AI applications
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="flex justify-center space-x-4">
+                    <a href="../vectors/" class="bg-blue-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-blue-700 transition">
+                        ← Review Vectors
+                    </a>
+                    <a href="../../main-index.html" class="bg-gray-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-gray-700 transition">
+                        Back to Home
+                    </a>
+                </div>
+            </section>
+
+            <!-- Placeholder for future content -->
+            <div class="bg-yellow-50 border-l-4 border-yellow-400 p-4 mb-10">
+                <div class="flex">
+                    <div class="flex-shrink-0">
+                        <svg class="h-5 w-5 text-yellow-400" viewBox="0 0 20 20" fill="currentColor">
+                            <path fill-rule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clip-rule="evenodd" />
+                        </svg>
+                    </div>
+                    <div class="ml-3">
+                        <p class="text-sm text-yellow-700">
+                            <strong>Content Development Note:</strong> This is a template file. The actual interactive content 
+                            for matrices will be added here, following the same engaging style as the vectors section.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+</body>
+</html>
